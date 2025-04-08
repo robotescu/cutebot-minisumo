@@ -20,7 +20,7 @@ basic.forever(function () {
         }
     }
     // a gasit linia si se invarte la 180 grade
-    if (cuteBot.tracking(cuteBot.TrackingState.L_R_unline)) {
+    if (cuteBot.tracking(cuteBot.TrackingState.L_unline_R_line) || cuteBot.tracking(cuteBot.TrackingState.L_line_R_unline)) {
         cuteBot.motors(100, -100)
         basic.pause(1000)
     }
