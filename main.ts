@@ -7,21 +7,38 @@ basic.forever(function () {
     // senzor >= 10 -> se invarte sa caute oponent
     if (sonar >= 2 && sonar < 10) {
         while (cuteBot.tracking(cuteBot.TrackingState.L_R_line)) {
-            cuteBot.forward()
+            cuteBot.motors(20, 20)
+            basic.showIcon(IconNames.Angry)
         }
     } else if (sonar >= 10) {
         while (cuteBot.tracking(cuteBot.TrackingState.L_R_line) && sonar >= 10) {
             if (Math.randomBoolean()) {
-                cuteBot.motors(100, 50)
+                cuteBot.motors(30, 10)
+                basic.showLeds(`
+                    . . . . .
+                    . . . # .
+                    # # # # #
+                    . . . # .
+                    . . . . .
+                    `)
             } else {
-                cuteBot.motors(50, 100)
+                cuteBot.motors(10, 30)
+                basic.showLeds(`
+                    . . . . .
+                    . # . . .
+                    # # # # #
+                    . # . . .
+                    . . . . .
+                    `)
             }
             basic.pause(100)
+            sonar = cuteBot.ultrasonic(cuteBot.SonarUnit.Centimeters)
         }
     }
     // a gasit linia si se invarte la 180 grade
     if (!(cuteBot.tracking(cuteBot.TrackingState.L_R_line))) {
-        cuteBot.motors(100, -100)
+        cuteBot.motors(20, -20)
+        basic.showIcon(IconNames.Sword)
         basic.pause(1000)
     }
 })
